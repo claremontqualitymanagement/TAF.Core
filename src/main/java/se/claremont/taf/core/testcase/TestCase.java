@@ -62,6 +62,7 @@ public class TestCase {
      *
      *  @param knownErrorsList An instance of KnownErrorsList. Could be null. Used for test set level known errors.
      *  @param testName The name of the test. For reporting purposes.
+     * @param testSetName The name of the class that extends the TestSet class, where this TestCase resides
      */
     public TestCase(KnownErrorsList knownErrorsList, String testName, String testSetName){
         this.testCaseMethodName = testName;
