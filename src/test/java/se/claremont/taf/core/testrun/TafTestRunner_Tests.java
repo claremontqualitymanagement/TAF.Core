@@ -8,7 +8,7 @@ import org.junit.runners.model.InitializationError;
 public class TafTestRunner_Tests {
     private long startTime;
     private FakeTestRunReporter fakeTestRunReporter;
-    private final int bufferTimeAccepted = 4;
+    private final int bufferTimeAccepted = 6;
     private final int numberOfTestCases = 4;
     private final int timePerTestCase = 3;
     private final int getNumberOfTestClasses = 2;
