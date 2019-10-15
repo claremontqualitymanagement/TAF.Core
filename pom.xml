@@ -14,7 +14,7 @@
         <connection>scm:git:git://github.com/claremontqualitymanagement/TAF.Core.git</connection>
         <developerConnection>scm:git://github.com/claremontqualitymanagement/TAF.Core.git</developerConnection>
         <url>https://github.com/claremontqualitymanagement/TAF.Core</url>
-        <tag>3.0.12</tag>
+        <tag>4.0.2-SNAPSHOT</tag>
     </scm>
 
     <developers>
