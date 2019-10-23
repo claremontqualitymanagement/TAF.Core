@@ -1,6 +1,5 @@
 package se.claremont.taf.core.reporting.testcasereports;
 
-import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 import se.claremont.taf.core.logging.KnownError;
 import se.claremont.taf.core.logging.LogFolder;
 import se.claremont.taf.core.logging.LogLevel;
