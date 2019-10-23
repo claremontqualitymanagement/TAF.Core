@@ -1,16 +1,17 @@
 package se.claremont.taf.core.reporting.testrunreports;
 
+import se.claremont.taf.core.support.StringManagement;
 import se.claremont.taf.core.support.SupportMethods;
 import se.claremont.taf.core.testrun.Settings;
 import se.claremont.taf.core.testrun.TestRun;
 
-import java.io.File;
-import java.io.FilenameFilter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Attempts to create a rudimentary HTML file listing all found test runs - to access test run HTML files.
@@ -247,13 +248,13 @@ public class BaseFolderHtmlIndexFile {
                 "      <table class=\"footer\" width=\"100%\">" + System.lineSeparator() +
                 "         <tr>" + System.lineSeparator() +
                 "            <td class=\"bottomlogo\" width=\"100%\">" + System.lineSeparator() +
-                "               <a href=\"http://www.claremont.se\" target=\"_blank\">" + System.lineSeparator() +
-                "                  <img alt=\"Claremont logo\" class=\"bottomlogo\" src=\"http://46.101.193.212/TAF/images/claremontlogo.gif\">" + System.lineSeparator() +
+                "               <a href=\"http://zingtongroup.com\" target=\"_blank\">" + System.lineSeparator() +
+                "                  <img alt=\"Zington logo\" class=\"bottomlogo\" src=\"" + StringManagement.imageFromResuoursesAsBase64EncodedString("logo.png") + "\">" + System.lineSeparator() +
                 "               </a>" + System.lineSeparator() +
                 "            </td>" + System.lineSeparator() +
                 "         </tr>" + System.lineSeparator() +
                 "         <tr>" + System.lineSeparator() +
-                "            <td width=\"100%\" class=\"copyright\"><br>(c) Claremont 2017</td>" + System.lineSeparator() +
+                "            <td width=\"100%\" class=\"copyright\"><br>(c) Zington " + new SimpleDateFormat("yyyy").format(new Date()) + "</td>" + System.lineSeparator() +
                 "         </tr>" + System.lineSeparator() +
                 "      </table>" + System.lineSeparator() +
                 "" + System.lineSeparator() +

@@ -1,6 +1,8 @@
 package se.claremont.taf.core.support;
 
-import java.io.File;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +29,56 @@ public class StringManagement {
         return returnString;
 
     }
+
+    public static String objectToBase64EncodedString(Object o){
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
+        try {
+            out = new ObjectOutputStream(bos);
+            out.writeObject(o);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bos.close();
+            } catch (IOException ex) {
+                // ignore close exception
+            }
+        }
+        byte[] bytes = bos.toString().getBytes();
+        return new String(Base64.getEncoder().encode(bytes));
+    }
+
+    public static String contentFromSvgFileInResources(String path){
+        File f = new File(ClassLoader.getSystemClassLoader().getResource(path).getFile());
+        try {
+            byte[] content = Files.readAllBytes(f.toPath());
+            return new String(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String imageFromResuoursesAsBase64EncodedString(String path){
+        String extension = "";
+
+        int i = path.lastIndexOf('.');
+        if (i > 0) {
+            extension = path.substring(i+1);
+        }
+        File f = new File(ClassLoader.getSystemClassLoader().getResource(path).getFile());
+        try {
+            byte[] content = Files.readAllBytes(f.toPath());
+            return "data:image/" + extension + ";base64," + objectToBase64EncodedString(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
     public static String safeClassName(String instring){
         String returnString = safeVariableName(instring);

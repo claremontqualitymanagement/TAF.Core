@@ -1,6 +1,8 @@
 package se.claremont.taf.core.reporting.testcasereports;
 
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 import se.claremont.taf.core.logging.KnownError;
+import se.claremont.taf.core.logging.LogFolder;
 import se.claremont.taf.core.logging.LogLevel;
 import se.claremont.taf.core.logging.LogPost;
 import se.claremont.taf.core.reporting.HtmlStyles;
@@ -16,6 +18,10 @@ import se.claremont.taf.core.testcase.TestCaseResult;
 import se.claremont.taf.core.testrun.Settings;
 import se.claremont.taf.core.testrun.TestRun;
 
+import java.io.*;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -100,8 +106,56 @@ public class TestCaseLogReporterHtmlLogFile implements TestCaseLogReporter {
      * Saves the output of the test case to an HTML formatted text file
      */
     public void report(){
+        if(TestRun.getSettingsValue(Settings.SettingParameters.PATH_TO_LOGO).toLowerCase().equals("icon.png") &&
+                !Files.exists(Paths.get( LogFolder.testRunLogFolder + File.pathSeparator + "icon.png"))){
+            moveWithFileNIO();
+        }
         SupportMethods.saveToFile(createReport(), testCaseResult.pathToHtmlLogFile);
     }
+
+    private static void moveWithFileNIO()
+    {
+
+        File sourceFile = new File(ClassLoader.getSystemClassLoader().getResource("icon.png").getFile());
+        File destinationFile = new File(LogFolder.testRunLogFolder + File.separator + "icon.png");
+        FileInputStream inputStream = null;
+        FileOutputStream outputStream = null;
+
+        sourceFile.deleteOnExit();
+
+        try {
+            inputStream = new FileInputStream(sourceFile);
+            outputStream = new FileOutputStream(destinationFile);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        final FileChannel inChannel = inputStream.getChannel();
+        final FileChannel outChannel = outputStream.getChannel();
+
+        try {
+            inChannel.transferTo(0, inChannel.size(), outChannel);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        finally
+        {
+            try {
+                inChannel.close();
+                outChannel.close();
+                inputStream.close();
+                outputStream.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
 
     String createReport(){
         testCaseResult.testCaseLog.log(LogLevel.DEBUG, "Saving html reportTestRun to '" + testCaseResult.pathToHtmlLogFile + "'.");
@@ -163,10 +217,10 @@ public class TestCaseLogReporterHtmlLogFile implements TestCaseLogReporter {
                 .append("          <br>").append(LF)
                 .append("          <table class=\"addFooter\" width=\"100%\">").append(LF)
                 .append("            <tr>").append(LF)
-                .append("              <td class=\"bottomlogo\" width=\"100%\"><a href=\"http://www.claremont.se\"><img alt=\"Claremont logo\" class=\"bottomlogo\" src=\"https://www.claremont.se/globalassets/bilder/logotyp/logo-long-lightblue.svg\"></a></td>").append(LF)
+                .append("              <td class=\"bottomlogo\" width=\"100%\"><a href=\"http://www.claremont.se\" target=\"_blank\">" + StringManagement.contentFromSvgFileInResources("logo.svg") + "</a></td>").append(LF)
                 .append("            </tr>").append(LF)
                 .append("            <tr>").append(LF)
-                .append("              <td width=\"100%\" class=\"").append(HtmlSummaryReport.HtmlStyleNames.COPYRIGHT.toString()).append("\"><br>TAF is licensed under the <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\" class=\"").append(HtmlSummaryReport.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase()).append("\">Apache 2.0 license</a>. &copy; Claremont ").append(new SimpleDateFormat("yyyy").format(new Date())).append(".").append(versionInfo).append("</td>").append(LF)
+                .append("              <td width=\"100%\" class=\"").append(HtmlSummaryReport.HtmlStyleNames.COPYRIGHT.toString()).append("\"><br>TAF is licensed under the <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\" class=\"").append(HtmlSummaryReport.HtmlStyleNames.LICENSE_LINK.toString().toLowerCase()).append("\">Apache 2.0 license</a>. &copy; Zington ").append(new SimpleDateFormat("yyyy").format(new Date())).append(".").append(versionInfo).append("</td>").append(LF)
                 .append("            </tr>").append(LF)
                 .append("          </table>").append(LF);
     }
@@ -200,6 +254,7 @@ public class TestCaseLogReporterHtmlLogFile implements TestCaseLogReporter {
                 "     .logpost, .testdatapost                                { border-bottom: 1px solid " + UxColors.MID_GREY.getHtmlColorCode() + "; }" + LF +
                 "      td.logPostLogLevel       { width: 130px; }" + LF +
                 "      td.logMessage            { max-width: 99%; overflow: scroll; }" + LF +
+                "      svg.zington_logo { width: 20%; height: auto; }" + LF +
                 "      img.screenshot:hover     { margin: -1px -2px -2px -1px; width: 340px; }" + SupportMethods.LF +
                 "      img.screenshot           { border: 0px none; width:105px; background: #999; }" + LF +
                 "      img.bottomlogo           { width: 20%; }" + LF +

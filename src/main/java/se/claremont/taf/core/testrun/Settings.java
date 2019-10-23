@@ -176,7 +176,7 @@ public class Settings extends HashMap<String, String> {
         }
         setValue(SettingParameters.TEST_RUN_LOG_FOLDER, "");
         setValue(SettingParameters.PARALLEL_TEST_EXECUTION_MODE, "1");
-        setValue(SettingParameters.PATH_TO_LOGO, "http://46.101.193.212/TAF/images/claremontlogo.gif");
+        setValue(SettingParameters.PATH_TO_LOGO, "icon.png");
         setValue(SettingParameters.EMAIL_REPORT_RECIPIENTS_COMMA_SEPARATED_LIST_OF_ADDRESSES, "");
         setValue(SettingParameters.EMAIL_SENDER_ADDRESS, "");
         setValue(SettingParameters.EMAIL_SERVER_ADDRESS, "");

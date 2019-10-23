@@ -187,6 +187,7 @@ public class HtmlSummaryReport {
                 .append("      th                    { text-align: left; }").append(LF)
                 .append("      img.toplogo           { width: 30%; }").append(LF)
                 .append("      img.bottomlogo        { width: 20%; }").append(LF)
+                .append("      svg.zington_logo { width: 20%; height: auto; }").append(LF)
                 .append("      td.bottomlogo         { text-align: center; background-color: ").append(UxColors.WHITE.getHtmlColorCode()).append("; }").append(LF)
                 .append("      table#").append(HtmlStyleNames.CONTENT.toString()).append("      { background-color: ").append(UxColors.WHITE.getHtmlColorCode()).append("; padding: 30px; margin: 30px; }").append(LF)
                 .append("      .moreerrorsasterisk   { color: ").append(UxColors.DARK_BLUE.getHtmlColorCode()).append("; }").append(LF)
@@ -431,9 +432,9 @@ public class HtmlSummaryReport {
                 .append("          <br>").append(LF)
                 .append("          <table width=\"100%\">").append(LF)
                 .append("            <tr>").append(LF)
-                .append("              <td class=\"bottomlogo\" width=\"100%\"><a href=\"http://www.claremont.se\"><img alt=\"Claremont logo\" class=\"bottomlogo\" src=\"https://www.claremont.se/globalassets/bilder/logotyp/logo-long-lightblue.svg\"></a></td>").append(LF)
+                .append("              <td class=\"bottomlogo\" width=\"100%\"><a href=\"http://www.zingtongroup.com\" target=\"_blank\">" + StringManagement.contentFromSvgFileInResources("logo.svg") + "</a></td>").append(LF)
                 .append("            </tr><tr>").append(LF)
-                .append("              <td width=\"100%\" class=\"").append(HtmlStyleNames.COPYRIGHT.toString()).append("\"><br>TAF is licensed under the <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\" class=\"").append(HtmlStyleNames.LICENSE_LINK.toString().toLowerCase()).append("\">Apache 2.0</a> license. &copy; Claremont ").append(new SimpleDateFormat("yyyy").format(new Date())).append(".</td>").append(LF)
+                .append("              <td width=\"100%\" class=\"").append(HtmlStyleNames.COPYRIGHT.toString()).append("\"><br>TAF is licensed under the <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\" class=\"").append(HtmlStyleNames.LICENSE_LINK.toString().toLowerCase()).append("\">Apache 2.0</a> license. &copy; Zington ").append(new SimpleDateFormat("yyyy").format(new Date())).append(".</td>").append(LF)
                 .append("            </tr>").append(LF)
                 .append("          </table>").append(LF);
     }
