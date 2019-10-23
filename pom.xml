@@ -5,7 +5,7 @@
     <groupId>com.github.claremontqualitymanagement</groupId>
     <artifactId>taf.core</artifactId>
     <name>TAF Core</name>
-    <version>4.2.3-SNAPSHOT</version>
+    <version>4.2.3</version>
     <packaging>jar</packaging>
     <description>Core module for TAF (Test Automation Framework) by Claremont.</description>
     <url>https://github.com/claremontqualitymanagement/TAF.Core</url>
